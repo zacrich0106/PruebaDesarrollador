@@ -16,17 +16,18 @@ class PrestamoController extends Controller
 
     // Crear un nuevo préstamo
     public function store(Request $request)
-    {
-        $request->validate([
-            'usuario_id' => 'required|exists:usuarios,id',
-            'libro_id' => 'required|exists:libros,id',
-            'fecha_prestamo' => 'required|date',
-            'fecha_devolucion' => 'required|date|after:fecha_prestamo',
-        ]);
+{
+    $request->validate([
+        'usuario_id' => 'required|exists:usuarios,id',
+        'libro_id' => 'required|exists:libros,id',
+        'fecha_prestamo' => 'required|date',
+        'fecha_devolucion' => 'required|date|after:fecha_prestamo',
+    ]);
 
-        $prestamo = Prestamo::create($request->all());
-        return response()->json($prestamo, 201);
-    }
+    $prestamo = Prestamo::create($request->all());
+
+    return response()->json($prestamo, 201);
+}
 
     // Mostrar detalles de un préstamo
     public function show($id)

@@ -8,35 +8,15 @@ export interface Prestamo {
   libro_id: number;
   fecha_prestamo: string;
   fecha_devolucion: string;
-  created_at?: string;
-  updated_at?: string;
 }
 
-// Obtener todos los préstamos
-export const getPrestamos = async (): Promise<Prestamo[]> => {
-  const response = await axios.get<Prestamo[]>(API_URL);
-  return response.data;
-};
-
-// Obtener un préstamo por ID
-export const getPrestamoById = async (id: number): Promise<Prestamo> => {
-  const response = await axios.get<Prestamo>(`${API_URL}/${id}`);
-  return response.data;
-};
-
-// Crear un préstamo
-export const createPrestamo = async (prestamo: Prestamo): Promise<Prestamo> => {
-  const response = await axios.post<Prestamo>(API_URL, prestamo);
-  return response.data;
-};
-
-// Actualizar un préstamo
-export const updatePrestamo = async (id: number, prestamo: Prestamo): Promise<Prestamo> => {
-  const response = await axios.put<Prestamo>(`${API_URL}/${id}`, prestamo);
-  return response.data;
-};
-
-// Eliminar un préstamo
-export const deletePrestamo = async (id: number): Promise<void> => {
-  await axios.delete(`${API_URL}/${id}`);
+export const createPrestamo = async (prestamo: Prestamo) => {
+  try {
+    const response = await axios.post(API_URL, prestamo, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error al crear préstamo:", error);
+  }
 };
