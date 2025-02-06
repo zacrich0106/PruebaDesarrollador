@@ -11,7 +11,6 @@ class Prestamo extends Model
 
     protected $fillable = [
         'fecha_prestamo',
-        'fecha_devolucion'
-        
+        'fecha_devolucion'        
     ];
 }
